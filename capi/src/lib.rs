@@ -1,7 +1,7 @@
 extern crate libc;
 extern crate embed;
 use std::slice;
-use libc::{size_t, c_int, c_char, strlen};
+use libc::{size_t, c_int, c_char};
 
 #[no_mangle]
 pub fn test() -> c_int {
