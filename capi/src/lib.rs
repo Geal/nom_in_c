@@ -1,7 +1,13 @@
+#![feature(no_std,core)]
+#![no_std]
+
+use core::prelude::*;
+
 extern crate libc;
 extern crate embed;
-use std::slice;
+extern crate core;
 use libc::{size_t, c_int, c_char};
+use core::slice;
 
 #[no_mangle]
 pub fn test() -> c_int {

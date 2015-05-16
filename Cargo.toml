@@ -3,5 +3,7 @@ name = "embed"
 version = "0.0.1"
 authors = ["Geoffroy Couprie <geo.couprie@gmail.com>"]
 
-[dependencies]
-nom = "*"
+[dependencies.nom]
+version = "*"
+git = "https://github.com/Geal/nom"
+features = ["core"]
