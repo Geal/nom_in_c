@@ -1,5 +1,5 @@
-#ifndef __EMBED_H
-#define __EMBED_H
+#ifndef EMBED_H_NOM20150802
+#define EMBED_H_NOM20150802
 
 #include <stdlib.h>
 
