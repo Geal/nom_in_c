@@ -5,7 +5,7 @@ use core::prelude::*;
 
 extern crate libc;
 extern crate embed;
-extern crate core;
+//extern crate core;
 use libc::{size_t, c_int, c_char};
 use core::slice;
 
