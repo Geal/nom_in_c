@@ -11,4 +11,4 @@ crate-type = ["staticlib"]
 libc = "0"
 
 [dependencies.embed]
-path = "../"
+path = "../embed"
