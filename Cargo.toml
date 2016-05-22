@@ -4,6 +4,6 @@ version = "0.0.1"
 authors = ["Geoffroy Couprie <geo.couprie@gmail.com>"]
 
 [dependencies.nom]
-version = "*"
+version = "^1.2.3"
 git = "https://github.com/Geal/nom"
 features = ["core"]

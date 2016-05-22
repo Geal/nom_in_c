@@ -1,14 +1,13 @@
-#![feature(no_std,core,collections)]
+#![feature(collections)]
 #![no_std]
 
-//#[macro_use]
 //extern crate core;
 //#[cfg(feature = "core")]
+#[macro_use]
 extern crate collections;
 
 //#[cfg(feature = "core")]
 mod std {
-#[macro_use]
   pub use core::{fmt, iter, option, ops, slice, mem};
   pub use collections::{boxed, vec, string};
   pub mod prelude {
@@ -23,7 +22,7 @@ use collections::boxed::Box;
 
 #[macro_use] extern crate nom;
 
-use nom::{IResult, eof,Err,ErrorKind};
+use nom::{IResult,eof,ErrorKind};
 
 pub fn it_works() -> i32 {
   42
@@ -44,11 +43,14 @@ pub fn count_noms(s:&[u8]) -> Option<usize> {
   //let b = Box::new(a);
   match omnom_parser(s) {
     IResult::Done(_, res) => Some(res.len()),
+    _                     => None,
+    /*
     IResult::Error(Err::Code(e)) => {None},
     IResult::Error(Err::Position(e,p)) => {None},
     IResult::Error(Err::Node(e, n)) => {None},
     IResult::Error(Err::NodePosition(e,p,n)) => {None},
     IResult::Incomplete(i) => {None}
+    */
   }
   /*if let IResult::Done(_, res) = omnom_parser(s) {
     Some(res.len())
