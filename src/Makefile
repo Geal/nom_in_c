@@ -6,7 +6,7 @@ else
 endif
 
 all:
-	gcc -Wall -o main main.c -I.. -L../target/debug -lembed_capi $(LDL) -lpthread -lc -lm
+	gcc -Wall -o main main.c -I../embed_capi -L../embed_capi/target/debug -lembed_capi $(LDL) -lpthread -lc -lm
 
 clean:
 	rm -f main
