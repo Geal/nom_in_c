@@ -47,6 +47,8 @@ AM_PROG_CC_C_O
 
 AC_C_INLINE
 
+AX_REQUIRE_CARGO
+
 AC_CONFIG_FILES([
     Makefile
 ])
@@ -67,4 +69,6 @@ AC_MSG_RESULT([
     compiler:               ${CC}
     cflags:                 ${CFLAGS}
     ldflags:                ${LDFLAGS}
+
+    cargo:                  ${CARGO}
 ])

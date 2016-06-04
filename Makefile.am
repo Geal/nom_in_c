@@ -27,6 +27,6 @@ main_LDFLAGS = -Lembed_capi/target/debug -lembed_capi $(LIBADD_DL) $(PTHREAD_LIB
 embed_capi: embed
 
 embed embed_capi:
-	cd $@ && cargo build
+	cd $@ && $(CARGO) build
 
 .PHONY: embed embed_capi
