@@ -28,7 +28,7 @@ LT_LIB_M
 
 AX_PTHREAD
 
-AM_INIT_AUTOMAKE(automake_required [subdir-objects foreign no-dist-gzip dist-xz tar-ustar -Wall])
+AM_INIT_AUTOMAKE(automake_required [subdir-objects foreign no-dist-gzip dist-xz tar-ustar -Wall -Wno-portability])
 AM_MAINTAINER_MODE([enable])
 AM_SILENT_RULES([yes])
 
