@@ -28,7 +28,7 @@ LT_LIB_M
 
 AX_PTHREAD
 
-AM_INIT_AUTOMAKE(automake_required [subdir-objects foreign no-dist-gzip dist-xz tar-ustar -Wall])
+AM_INIT_AUTOMAKE(automake_required [subdir-objects foreign no-dist-gzip dist-xz tar-ustar -Wall -Wno-portability])
 AM_MAINTAINER_MODE([enable])
 AM_SILENT_RULES([yes])
 
@@ -46,6 +46,8 @@ AC_PROG_CC_C99
 AM_PROG_CC_C_O
 
 AC_C_INLINE
+
+AX_REQUIRE_CARGO
 
 AC_CONFIG_FILES([
     Makefile
@@ -67,4 +69,6 @@ AC_MSG_RESULT([
     compiler:               ${CC}
     cflags:                 ${CFLAGS}
     ldflags:                ${LDFLAGS}
+
+    cargo:                  ${CARGO}
 ])

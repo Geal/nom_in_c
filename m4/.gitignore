@@ -1,2 +1,3 @@
 *.m4
 !ax_pthread.m4
+!ax_cargo.m4

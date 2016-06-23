@@ -1,0 +1,61 @@
+# Copyright (c) 2016 Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
+
+# * Input variables:
+#
+#   CARGO - The cargo tool
+#   CARGO_ARGS - Arguments to pass cargo
+#   CARGO_CRATES - List of crates that should be built
+#
+# * Simple tutorial
+#
+# Add this to configure.ac:
+#
+#   AX_REQUIRE_CARGO
+#
+# Add this to the Makefile.am where your crate is built:
+#
+#    include Makefile.cargo
+#    CARGO_CRATES = YourCrate
+#    YourCrate_FEATURES = foo bar
+#    YourCrate_DEPS = AnotherCrate
+
+# Ensure CARGO is defined
+$(if $(CARGO), , $(error CARGO needs to be defined))
+
+# Private functions
+## Sanitize the crate name
+_crate_name = $(subst /, _, $(subst ., _, $(subst -, _, $(1))))
+
+## Handle Makefile verbosity
+_cargo_silent_prefix = $(_cargo_silent_prefix_$(V))
+_cargo_silent_prefix_ = $(_cargo_silent_prefix_$(AM_DEFAULT_VERBOSITY))
+_cargo_silent_prefix_0 = @echo "  CARGO  $(1)";
+_cargo_silent_args = $(_cargo_silent_args_$(V))
+_cargo_silent_args_ = $(_cargo_silent_args_$(AM_DEFAULT_VERBOSITY))
+_cargo_silent_args_0 = --quiet
+_cargo_silent_args_1 = --verbose
+
+# Define the machinery to run for each crate
+# $(call call-cargo, crate, deps, features_arg)
+define call-cargo
+
+# Ensure we build all the deps first, then build our crate
+$(1): $(2)
+	$(_cargo_silent_prefix) $(CARGO) \
+	    build \
+	    $(CARGO_ARGS) \
+	    $(_cargo_silent_args) \
+	    $(3) \
+	    --manifest-path $(1)/Cargo.toml
+
+endef
+
+# Run CARGO on all the crates
+$(foreach crate, $(CARGO_CRATES), $(eval $(call call-cargo, $(crate), $($(crate)_DEPS), $(if $($(crate)_FEATURES), --features "$($(crate)_FEATURES)"))))
+
+# Ensure everything gets cleaned properly
+clean-local:
+	-rm -rf $(foreach crate, $(CARGO_CRATES), $(crate)/target)
+
+# Let cargo handle whether something needs rebuilding or not
+.PHONY: $(CARGO_CRATES)

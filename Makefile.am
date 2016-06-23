@@ -19,14 +19,18 @@ CLEANFILES =
 bin_PROGRAMS = main
 noinst_LTLIBRARIES =
 
+CARGO_MODE = release
+
 main_SOURCES = src/main.c
 main_DEPENDENCIES = embed_capi
 main_CFLAGS = $(PTHREAD_CFLAGS)
-main_LDFLAGS = -Lembed_capi/target/debug -lembed_capi $(LIBADD_DL) $(PTHREAD_LIBS) $(LIBM)
+main_LDFLAGS = -Lembed_capi/target/$(CARGO_MODE) -lembed_capi $(LIBADD_DL) $(PTHREAD_LIBS) $(LIBM)
 
-embed_capi: embed
+CARGO_ARGS = --$(CARGO_MODE)
+CARGO_CRATES = embed embed_capi
 
-embed embed_capi:
-	cd $@ && cargo build
+embed_capi_DEPS = embed
+
+include Makefile.cargo
 
 .PHONY: embed embed_capi
